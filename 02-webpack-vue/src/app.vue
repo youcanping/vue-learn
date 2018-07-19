@@ -1,5 +1,8 @@
 <template>
-    <div> Hello {{ name }}</div>
+    <div>
+		<h1>Hello World</h1>
+		Hello {{ name }}
+	</div>
 </template>
 
 <script>
@@ -18,4 +21,7 @@
         color: #F60;
         font-size: 24px;
     }
+	div>h1{
+		color: blue;
+	}
 </style>
