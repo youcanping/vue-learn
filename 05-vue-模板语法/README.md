@@ -1,4 +1,5 @@
 # 模板语法
+> 模板里面`Vue.js 2.0`后，只能包含一个根元素。
 ## 插值
 ### 使用双大括号语法，进行文本插值
 ```
@@ -19,7 +20,7 @@
 	{{ if(isOk){return "yes"}else{return "no"} }}
 ```
 * 表达式中可用到的全局对象，如原生内置对象`Date`，`Math`，`Regex`等，不能访问用户自定义的全局变量。
-### 指令
+## 指令
 * `v-bind`缩写`:`
 ```html
 <button v-bind:disabled="buttonDisabled">按钮</button>
