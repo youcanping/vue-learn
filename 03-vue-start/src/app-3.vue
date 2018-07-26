@@ -1,16 +1,16 @@
 <template>
-	<div v-bind:title="message">
-		悬停基本看看变化
+	<div>
+		<p v-if="seen">我显示了</p>
 	</div>
 </template>
 <!--
-	使用v-bind指令与data数据进行绑定
+	元素控制是否显示, v-if 会把dom从文档树中移除，添加
 -->
 <script>
     export default {
 		data() {
         	return {
-        		message: "页面加载于" + new Date().toLocaleString()
+        		seen: true
 			}
 		}
     }
@@ -22,5 +22,7 @@
 		font-size: 1.2em;
 		color: #ffffff;
 		text-align: center;
+		width: 100%;
+		height: 50px;
 	}
 </style>

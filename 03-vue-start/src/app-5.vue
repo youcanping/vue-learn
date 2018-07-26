@@ -1,17 +1,22 @@
 <template>
 	<div>
-		<p v-show="show">我显示了</p>
+		<h3>{{ message }}</h3>
+		<button v-on:click="reverseMessage">字符串反转</button>
 	</div>
 </template>
 <!--
-	元素控制是否显示s
-	v-show: 只是控制元素的display属性
+	使用v-on绑定事件
 -->
 <script>
     export default {
 		data() {
         	return {
-        		show: false
+        		message: "Hello Vue.js"
+			}
+		},
+		methods: {
+			reverseMessage: function (e) {
+				this.message = this.message.split("").reverse().join("");
 			}
 		}
     }
@@ -19,11 +24,6 @@
 
 <style scoped>
 	div{
-		background: pink;
-		font-size: 1.2em;
-		color: #ffffff;
 		text-align: center;
-		width: 100%;
-		height: 50px;
 	}
 </style>

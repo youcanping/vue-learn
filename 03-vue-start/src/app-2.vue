@@ -1,13 +1,16 @@
 <template>
-	<div>{{message}}</div>
+	<div v-bind:title="message">
+		悬停基本看看变化
+	</div>
 </template>
-
+<!--
+	使用v-bind指令与data数据进行绑定
+-->
 <script>
     export default {
-        name: "app",
 		data() {
         	return {
-        		message: "Vue.js"
+        		message: "页面加载于" + new Date().toLocaleString()
 			}
 		}
     }
@@ -15,7 +18,7 @@
 
 <style scoped>
 	div{
-		background: lightseagreen;
+		background: cornflowerblue;
 		font-size: 1.2em;
 		color: #ffffff;
 		text-align: center;

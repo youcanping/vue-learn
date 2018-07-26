@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<h3>{{ message }}</h3>
-		<button v-on:click="reverseMessage">字符串反转</button>
+		<label for="input">请输入：</label><input id="input" v-model="message"/>
 	</div>
 </template>
 <!--
@@ -12,11 +12,6 @@
 		data() {
         	return {
         		message: "Hello Vue.js"
-			}
-		},
-		methods: {
-			reverseMessage: function (e) {
-				this.message = this.message.split("").reverse().join("");
 			}
 		}
     }

@@ -58,8 +58,8 @@ module.exports = {
             }
         }),
         new ExtractTextWebpackPlugin("index.css"),
-		new webpack.HotModuleReplacementPlugin(),
         new VueLoaderPlugin(), // 必须要加，否则报错
+        new webpack.HotModuleReplacementPlugin()
     ],
     devServer: {
         contentBase: path.join(__dirname, "dist"),
