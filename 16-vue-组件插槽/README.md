@@ -1,81 +1,67 @@
-# 自定义事件
-## 命名规则
-* 触发的事件名要和监听的事件名完全匹配才能被触发。
-* 触发`camelCase`的事件名不能用`kebab-case`来监听
-```js
- this.$emit("myEvent");
-```
-```html
-	<base-button v-on:my-event="handler"></baseButton>
-```
-* 由于`html`是大小写不敏感的，事件名中包含大写字母都会解释成小写，会造成事件无法匹配触发的问题。
-* 为了避免不必要的麻烦，事件名统一使用`kebab-case`规则命名。
-## 自定义组件v-model
-一个组件的`v-model`默认会使用prop`value`特性和`input`事件来实现。    
-单选框复选框这样的表单类型`value`有另外用途，这种情况可以使用`model`属性来解决该问题
+# Vue组件插槽
+## 匿名插槽
+匿名插件接收组件内的任何内容。
 ```html
 <template>
-	<label>
-		{{label}}
-		<input type="checkbox" 
-				v-bind:checked="checked" 
-				v-on:change="$emit('change', $event.target.checked)"
-		>
-	</label>
+	<a target="_blank" v-bind:href="url">
+		<slot></slot>
+	</a>
 </template>
 ```
-```javascript
-Vue.component("BaseCheckbox", {
-	inheritAttrs: false,
-	model: {
-		prop: "checked", //需要在props声明
-		event: "change"
-	},
-	props: {
-		checked: Boolean,
-		label: null
-	}
+```js
+Vue.component("navigation-link",{
+	props: ["url"]
 });
 ```
 ```html
-<base-chckebox v-model="checked" v-on:change="onChange"></base-chckebox>
+<navigation-link url="http://www.jd.com">京东商城</navigation-link>
 ```
-
-## 绑定原生事件
-如何让组件像使用原生控件一样，使用原生事件。
-> Vue提供了`$listeners`属性来绑定原生事件
+## 具名插槽
+具名插槽用于约定插槽内容存放的位置，在`slot`元素中的`name`特性来区分
 ```html
 <template>
-<label>
-	{{label}} <input type="text" 
-				v-bind="$attrs"
-				v-bind:value="value"
-				v-on="inputListeners"
-	>
-</label>
+<div>
+	<header>
+		<slot name="header"></slot>
+	</header>
+	<main>
+		<slot></slot>
+	</main>
+	<footer>
+		<slot name="footer"></slot>
+	</footer>
+</div>
 </template>
 ```
-```javascript
-Vue.component("BaseInput", {
-	inheritAttrs: false,
-	props: {
-		value: null,
-		label: String
-	},
-	computed: {
-		inputListeners: function() {
-		  	let self = this;
-		  	return Object.assign({}, 
-		  		self.$listeners,
-		  		{
-		  			input: function (e) {
-						return vm.$emit('input', e.target.value);
-					}
-		  		}
-		  	)
-		}
-	}
-})
+```html
+<page-layout>
+	<!-- 头部标题的内容 -->
+	<div slot="header">标题</div>
+	<!--除了具名插槽外的都系都显示在匿名插槽内-->
+	<div></div>
+	<div slot="footer">底部</div>
+</page-layout>
 ```
-
-
+## 作用域插槽
+通过插槽把组件内部的值向外传递，并且外部可以覆盖内部插件的默认内容
+```html
+<template>
+	<ul>
+		<li v-for="todo of todos" v-bind:key="todo.id">
+			<slot v-bind:todo="todo">
+				{{todo.text}}
+			</slot>
+		</li>	
+	</ul>
+</template>
+```
+```html
+<template>
+	<todo-list v-bind:todos="todos">
+		<template slot-scope="slotProps">
+			<span v-if="slotProps.todo.isComplete">✅</span>
+			{{ slotProps.todo.text }}
+		</template>	
+	</todo-list>
+</template>
+```
