@@ -1,10 +1,12 @@
 <template>
-    $END$
+    <div>
+		<h1>Foo</h1>
+	</div>
 </template>
 
 <script>
     export default {
-        name: "china"
+        name: "foo"
     }
 </script>
 
