@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
-    "vue": "^2.5.16"
+    "vue": "^2.5.16",
+    "vue-router": "^3.0.1"
   }
 }
