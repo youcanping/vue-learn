@@ -9,7 +9,7 @@ import App from './app.vue';
 // import App from './app-8.vue';
 // import App from './app-9.vue';
 // import App from './app-10.vue';
-new Vue({
+window.vm = new Vue({
 	name: "app",
     el: '#app',
     render: h => {
