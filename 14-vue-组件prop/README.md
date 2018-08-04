@@ -76,7 +76,7 @@ Vue.component("my-component", {
 		},
 		// 自定义验证函数
 		propF: {
-			type: String
+			type: String,
 			validator: function(value){
 				return ["success", "warning", "danger"].indexOf(value) !== -1;
 			}
@@ -98,7 +98,7 @@ Vue.component("my-component", {
 	<div>
 		<button v-bind="$attrs"><slot></slot></button>
 	</div>
-</template
+</template>
 ```
 ```js
 Vue.component("BaseButton",{
