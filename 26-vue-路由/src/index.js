@@ -1,7 +1,7 @@
 import Vue from 'vue';
-import App from './app.vue';
+// import App from './app.vue';
 // import App from './app-2.vue';
-// import App from './app-3.vue';
+import App from './app-3.vue';
 // import App from './app-4.vue';
 // import App from './app-5.vue';
 // import App from './app-6.vue';
