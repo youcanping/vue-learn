@@ -6,19 +6,17 @@
 
 ## Usage
 ```HTML
-<component :text="hello"></component>
+<Lemon :text="hello"></Lemon>
 ```
 ```javascript
-import { component } from '101-vue-cli-project'
+import { Lemon } from '101-vue-cli-project'
 
 export default {
   components: {
-    component
+    Lemon
   }
 }
 ```
-## API
-
 ## Installation
 ```
 npm install 101-vue-cli-project
@@ -49,9 +47,9 @@ npm run lint
 npm run test:unit
 ```
 
-### Update the API section of README.md with generated documentation
+### Run your end-to-end tests
 ```
-npm run doc:build
+npm run test:e2e
 ```
 
 ### Run style guide dev server

@@ -31,7 +31,7 @@
 
 <script>
 export default {
-  name: 'component',
+  name: 'Lemon',
   props: {
     msg: String
   }
