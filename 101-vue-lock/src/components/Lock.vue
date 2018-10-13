@@ -1,93 +1,50 @@
 <template>
-	<div
-		:id="lockId"
-		class="lm-lock"
-	>
+	<div  :id="lockId">
+
 	</div>
 </template>
 
 <script>
-	import PatternLock from "patternlock";
-
-	/**
-	 * 手势密码组件
-	 * @version 0.0.1
-	 * @description 预置2种手势密码风格，style-a:直销风格，style-b:个人手机风格
-	 */
+	// import PatternLock from "patternlock";
+	import PatternLock from "./PatternLock";
+	console.log(PatternLock)
 	export default {
-		name: "LmLock",
-		data:()=>{
+		name: "lock",
+		props: {
+			lockId: {
+				type: String,
+				default: "#patternHolder"
+			}
+		},
+		data:function () {
 			return {
 				lock: null
 			}
 		},
-		props: {
-			/**
-			 * @description 手势密码的容器指定唯一id
-			 */
-			lockId: {
-				type: String,
-				default: "lm-lock-holder"
-			},
-			/**
-			 * @description 指定手势密码页面的风格，lock-a:直销银行分格，lock-b:手机银行风格
-			 */
-			lockStyle: {
-				type: String,
-				default: "lock-a",
-				validator: (val)=>{
-					return ["lock-a", "lock-b"].indexOf(val) !== -1;
-				}
-			},
-			/**
-			 * @description 设置手势区域圆的外边距、圆的半径和输出结果的分隔符
-			 */
-			lockOption: {
-				type: Object,
-				default: ()=>{
-					return {
-						margin: 20,
-						radius: 25,
-						delimiter: ""
-					};
-				}
-			},
-			/**
-			 * @description 设置手势密码内置对象的外部引用，用于方法调用
-			 */
-			lockRef: {
-				type: Object
-			}
+		created(){
+
 		},
 		mounted(){
-			this.lock = new PatternLock("#"+this.lockId);
-			/**
-			 * @event onDraw
-			 * @type Function
-			 * @description  监听手势绘画
-			 * */
-			this.lock.option("onDraw", (pattern)=>{
-				this.$emit('onDraw', pattern)
-				this.lockRef.error()
+			this.lock = new PatternLock("#"+this.lockId, {
+				// enableSetPattern: false
 			});
-			console.log("ref="+this.lockRef);
-			if(this.lockRef && this.lock){
-				/**
-				 * @event reset 重置手势密码
-				 * @return void
-				 */
-				this.lockRef = this.lock;
-				// this.lockRef.reset = this.lock.reset;
-				// this.lockRef.error = this.lock.error;
-				// this.lockRef.getValue = this.lock.getPattern;
-				// this.lockRef.disable = this.lock.disable;
-				// this.lockRef.enabled = this.lock.enabled;
-			}
+			this.lock.option("onDraw", (pattern)=>{
+				//do something with pattern
+				console.log(pattern);
+				console.log(this.lock.getPattern())
+				this.lock.reset()
+			});
+			// this.lock.setPattern('12587');
+			this.lock.checkForPattern('1,2',function(){
+				alert("You unlocked your app");
+			},function(){
+				alert("Pattern is not correct");
+			});
 		}
 	}
 </script>
 
-<style lang="stylus">
+<style>
 	.patt-holder{background: transparent;  -ms-touch-action: none;}
 	.patt-wrap{
 		/*position:relative; */
@@ -175,4 +132,52 @@
 	.patt-hidden .patt-lines{
 		display:none;
 	}
+
+	/*.patt-circ.dir:after{*/
+	/*content: "";*/
+	/*display: inline-block;*/
+	/*height:0;*/
+	/*width:0;*/
+	/*overflow: hidden;*/
+	/*font-size: 0;*/
+	/*line-height: 0;*/
+	/*border-color: transparent  transparent transparent #2B9AE4;*/
+	/*border-style: dashed dashed dashed solid;*/
+	/*border-width:4px;*/
+	/*float: left;*/
+	/*margin-top: 20px;*/
+	/*margin-left: 40px;*/
+	/*}*/
+	/*.patt-circ.e {*/
+	/*-webkit-transform: rotate(0);*/
+	/*transform: rotate(0);*/
+	/*}*/
+	/*.patt-circ.s-e {*/
+	/*-webkit-transform: rotate(45deg);*/
+	/*transform: rotate(45deg);*/
+	/*}*/
+	/*.patt-circ.s {*/
+	/*-webkit-transform: rotate(90deg);*/
+	/*transform: rotate(90deg);*/
+	/*}*/
+	/*.patt-circ.s-w {*/
+	/*-webkit-transform: rotate(135deg);*/
+	/*transform: rotate(135deg);*/
+	/*}*/
+	/*.patt-circ.w {*/
+	/*-webkit-transform: rotate(180deg);*/
+	/*transform: rotate(180deg);*/
+	/*}*/
+	/*.patt-circ.n-w {*/
+	/*-webkit-transform: rotate(225deg);*/
+	/*transform: rotate(225deg);*/
+	/*}*/
+	/*.patt-circ.n {*/
+	/*-webkit-transform: rotate(270deg);*/
+	/*transform: rotate(270deg);*/
+	/*}*/
+	/*.patt-circ.n-e {*/
+	/*-webkit-transform: rotate(315deg);*/
+	/*transform: rotate(315deg);*/
+	/*}*/
 </style>
